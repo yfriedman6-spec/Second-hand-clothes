@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Vibes - חנות בגדי יד שנייה</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        spring: {
+                            light: '#fdf6e3',
+                            green: '#a7c957',
+                            darkgreen: '#6a994e',
+                            pink: '#f28482',
+                            yellow: '#f4a261',
+                            blue: '#8eecf5'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Rubik', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Rubik', sans-serif;
+            background-color: #fdf6e3;
+            /* Spring pattern background subtle */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a7c957' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Hero background with overlay for text readability */
+        .hero-bg {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .category-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Whatsapp float animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .whatsapp-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .bg-floral-yellow {
+            background-color: #fdf096;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23ffffff' fill-opacity='0.8'%3E%3Cpath d='M40 30c-4 0-8-4-8-8s4-8 8-8 8 4 8 8-4 8-8 8zm0 20c-4 0-8 4-8 8s4 8 8 8 8-4 8-8-4-8-8-8zm-15-15c0-4-4-8-8-8s-8 4-8 8 4 8 8 8 4-8 8-8zm30 0c0-4 4-8 8-8s8 4 8 8-4 8-8 8-4-8-8-8z'/%3E%3Ccircle cx='40' cy='40' r='6' fill='%23ffffff' fill-opacity='0.9'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Accessibility focus rings */
+        *:focus-visible {
+            outline: 3px solid #6a994e;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased overflow-x-hidden">
+
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:right-4 bg-spring-darkgreen text-white p-3 rounded z-50">
+        דלג לתוכן המרכזי
+    </a>
+
+    <!-- Navbar -->
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-40 shadow-sm" role="navigation" aria-label="תפריט ניווט ראשי">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex items-center gap-2" aria-label="Spring Vibes דף הבית">
+                        <i class="fa-solid fa-leaf text-spring-darkgreen text-2xl"></i>
+                        <span class="font-bold text-2xl text-spring-darkgreen tracking-tight">SpringVibes</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 space-x-reverse items-center">
+                    <a href="#categories" class="text-gray-600 hover:text-spring-darkgreen px-3 py-2 rounded-md font-medium transition-colors">קטגוריות</a>
+                    <a href="#about" class="text-gray-600 hover:text-spring-darkgreen px-3 py-2 rounded-md font-medium transition-colors">עלינו</a>
+                    <a href="#reviews" class="text-gray-600 hover:text-spring-darkgreen px-3 py-2 rounded-md font-medium transition-colors">ביקורות</a>
+                    <a href="#location" class="text-gray-600 hover:text-spring-darkgreen px-3 py-2 rounded-md font-medium transition-colors">מיקום</a>
+                    <button class="bg-spring-pink text-white px-5 py-2 rounded-full font-medium hover:bg-opacity-90 transition shadow-sm" aria-label="התחל לקנות">
+                        חנות
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-spring-darkgreen focus:outline-none p-2" aria-expanded="false" aria-controls="mobile-menu" aria-label="פתח תפריט">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100" aria-label="תפריט ניווט למובייל">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#categories" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-spring-darkgreen hover:bg-spring-light">קטגוריות</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-spring-darkgreen hover:bg-spring-light">עלינו</a>
+                <a href="#reviews" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-spring-darkgreen hover:bg-spring-light">ביקורות</a>
+                <a href="#location" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-spring-darkgreen hover:bg-spring-light">מיקום</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero-bg min-h-[80vh] flex items-center justify-center relative overflow-hidden" aria-labelledby="hero-heading">
+            <div class="absolute inset-0 bg-white/30 backdrop-blur-[2px]"></div>
+            
+            <!-- Decorative spring elements -->
+            <i class="fa-solid fa-fan absolute top-20 right-20 text-spring-pink/40 text-6xl animate-spin-slow" aria-hidden="true"></i>
+            <i class="fa-solid fa-sun absolute bottom-32 left-16 text-spring-yellow/60 text-5xl" aria-hidden="true"></i>
+            <i class="fa-solid fa-seedling absolute top-1/3 left-1/4 text-spring-green/50 text-4xl" aria-hidden="true"></i>
+
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <span class="inline-block py-1 px-3 rounded-full bg-spring-green/20 text-spring-darkgreen font-semibold text-sm mb-4">וינטג' ויד שנייה לכל עונה ♻️</span>
+                <h1 id="hero-heading" class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
+                    לגלות את הסטייל שלך מחדש <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-l from-spring-darkgreen to-spring-green">עם אופנת יד שנייה שכולה פריחה</span>
+                </h1>
+                <p class="mt-4 text-lg sm:text-xl text-gray-700 mb-8 max-w-2xl mx-auto font-medium">
+                    אצלנו תמצאו מגוון עצום של בגדים, סגנונות ומידות מכל העונות! ממעילי חורף ועד שמלות קיץ, הכל נבחר בקפידה. תנו לבגדים חיים חדשים ובואו לגלות את האוצר הבא שלכם.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#categories" class="bg-spring-darkgreen text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-opacity-90 transition shadow-lg flex items-center justify-center gap-2">
+                        התחילו לחקור <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                    </a>
+                    <a href="#location" class="bg-white text-spring-darkgreen border-2 border-spring-darkgreen px-8 py-3 rounded-full font-bold text-lg hover:bg-spring-light transition flex items-center justify-center gap-2">
+                        בואו לבקר בחנות <i class="fa-solid fa-shop" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section id="categories" class="py-20 bg-floral-yellow relative" aria-labelledby="categories-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-16">
+                    <div class="bg-white/80 backdrop-blur-sm inline-block px-8 py-6 rounded-3xl shadow-sm border border-white/50">
+                        <h2 id="categories-heading" class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">למי אתם מחפשים?</h2>
+                        <div class="w-24 h-1 bg-spring-green mx-auto rounded-full"></div>
+                        <p class="mt-4 text-gray-800 font-medium">בחרו קטגוריה וגלו פריטים מיוחדים מכל העונות</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Women Category -->
+                    <a href="#" class="category-card group block relative rounded-2xl overflow-hidden h-96 shadow-md" aria-label="קטגוריית נשים">
+                        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="אישה בחנות בגדים בוחנת קולבים" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6 text-right">
+                            <span class="bg-spring-pink text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">מגוון סגנונות</span>
+                            <h3 class="text-3xl font-bold text-white mb-2">נשים</h3>
+                            <p class="text-gray-200 text-sm group-hover:text-white transition">שמלות קיץ, סוודרים לחורף, אקססוריז ופריטי וינטג' נדירים.</p>
+                            <div class="mt-4 inline-flex items-center text-spring-green font-medium group-hover:text-white transition">
+                                צפו בקולקציה <i class="fa-solid fa-chevron-left mr-2 text-sm" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Men Category -->
+                    <a href="#" class="category-card group block relative rounded-2xl overflow-hidden h-96 shadow-md" aria-label="קטגוריית גברים">
+                        <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="גבר לובש חולצה מסוגננת" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6 text-right">
+                            <h3 class="text-3xl font-bold text-white mb-2">גברים</h3>
+                            <p class="text-gray-200 text-sm group-hover:text-white transition">ג'קטים לכל מזג אוויר, חולצות מכופתרות, ג'ינסים ואופנת רחוב.</p>
+                            <div class="mt-4 inline-flex items-center text-spring-yellow font-medium group-hover:text-white transition">
+                                צפו בקולקציה <i class="fa-solid fa-chevron-left mr-2 text-sm" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Kids Category -->
+                    <a href="#" class="category-card group block relative rounded-2xl overflow-hidden h-96 shadow-md border-4 border-white" aria-label="קטגוריית ילדות וילדים">
+                        <img src="https://images.unsplash.com/photo-1519238396086-a2a46cb8ee88?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="ילד בבגדים צבעוניים ושמחים" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-6 text-right">
+                            <h3 class="text-3xl font-bold text-white mb-2">ילדות וילדים</h3>
+                            <p class="text-gray-200 text-sm group-hover:text-white transition">בגדים נוחים ובמצב מעולה לקטנטנים, לכל גיל ולכל עונה.</p>
+                            <div class="mt-4 inline-flex items-center text-spring-blue font-medium group-hover:text-white transition">
+                                צפו בקולקציה <i class="fa-solid fa-chevron-left mr-2 text-sm" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Shop With Us -->
+        <section id="about" class="py-16 bg-spring-light" aria-labelledby="why-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 id="why-heading" class="text-3xl font-bold text-gray-900">למה לבחור ביד שנייה?</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <div class="w-16 h-16 bg-spring-green/20 rounded-full flex items-center justify-center mx-auto mb-4 text-spring-darkgreen text-2xl">
+                            <i class="fa-solid fa-infinity" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">כל העונות, כל השנה</h3>
+                        <p class="text-gray-600">מגוון רחב של בגדים וסגנונות המתאימים לחורף, קיץ, סתיו ואביב - הכל זמין תמיד בחנות שלנו.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <div class="w-16 h-16 bg-spring-yellow/20 rounded-full flex items-center justify-center mx-auto mb-4 text-spring-yellow text-2xl">
+                            <i class="fa-solid fa-earth-americas" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">שומרים על הסביבה</h3>
+                        <p class="text-gray-600">קניית יד שנייה מפחיתה פסולת טקסטיל ועוזרת לכדור הארץ לפרוח.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <div class="w-16 h-16 bg-spring-pink/20 rounded-full flex items-center justify-center mx-auto mb-4 text-spring-pink text-2xl">
+                            <i class="fa-solid fa-shirt" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">סטייל ייחודי</h3>
+                        <p class="text-gray-600">מצאו פריטי וינטג' מיוחדים שלא תראו על אף אחד אחר ברחוב, במחירים מעולים.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section id="reviews" class="py-20 bg-white relative" aria-labelledby="reviews-heading">
+            <!-- Decorative background element -->
+            <div class="absolute right-0 top-0 w-64 h-64 bg-spring-pink/10 rounded-full blur-3xl -z-10"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 id="reviews-heading" class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">לקוחות אוהבים את SpringVibes</h2>
+                    <div class="flex justify-center items-center gap-1 text-spring-yellow text-xl">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                        <span class="text-gray-600 text-base font-medium mr-2" aria-label="דירוג ממוצע 4.8 מתוך 5">4.8 / 5</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Review 1 -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm relative">
+                        <i class="fa-solid fa-quote-right absolute top-4 right-4 text-spring-green/20 text-4xl"></i>
+                        <div class="flex items-center gap-1 text-spring-yellow text-sm mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-700 mb-4 relative z-10">"חנות מדהימה! מסודרת להפליא, לא מרגיש כמו חנות יד שנייה טיפוסית. מצאתי שמלה קייצית מושלמת במצב חדש לגמרי. הצוות היה מקסים."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-spring-pink text-white rounded-full flex items-center justify-center font-bold">מ</div>
+                            <div>
+                                <h4 class="font-bold text-sm">מיכל כ.</h4>
+                                <span class="text-xs text-gray-500">לפני שבועיים</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm relative">
+                        <i class="fa-solid fa-quote-right absolute top-4 right-4 text-spring-green/20 text-4xl"></i>
+                        <div class="flex items-center gap-1 text-spring-yellow text-sm mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <p class="text-gray-700 mb-4 relative z-10">"מבחר מעולה של בגדי גברים. מצאתי כמה חולצות וינטג' נדירות. המחירים ממש סבירים והאווירה בחנות בתל אביב פשוט כיפית וקלילה."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-spring-darkgreen text-white rounded-full flex items-center justify-center font-bold">י</div>
+                            <div>
+                                <h4 class="font-bold text-sm">יונתן א.</h4>
+                                <span class="text-xs text-gray-500">לפני חודש</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm relative">
+                        <i class="fa-solid fa-quote-right absolute top-4 right-4 text-spring-green/20 text-4xl"></i>
+                        <div class="flex items-center gap-1 text-spring-yellow text-sm mb-3">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-700 mb-4 relative z-10">"קניתי שם בגדים לילדים שלי. איזה כיף שיש פתרון זול ואקולוגי כשהם גדלים כל כך מהר! הבגדים נקיים ומריחים מעולה. ממליצה בחום."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-spring-blue text-gray-800 rounded-full flex items-center justify-center font-bold">ר</div>
+                            <div>
+                                <h4 class="font-bold text-sm">רעות ש.</h4>
+                                <span class="text-xs text-gray-500">לפני שבוע</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location & CTA -->
+        <section id="location" class="py-16 bg-spring-darkgreen text-white relative overflow-hidden" aria-labelledby="location-heading">
+            <div class="absolute -left-20 -bottom-20 w-64 h-64 bg-white opacity-10 rounded-full"></div>
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-spring-yellow opacity-20 rounded-full"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-10">
+                    <div class="md:w-1/2 text-center md:text-right">
+                        <h2 id="location-heading" class="text-3xl md:text-4xl font-bold mb-4">קפצו לבקר אותנו בתל אביב</h2>
+                        <p class="text-spring-light/90 text-lg mb-6">
+                            החנות שלנו מעוצבת, מונגשת ומזמינה. בואו למדוד, לגעת ולהתאהב בפריטים מקרוב.
+                        </p>
+                        
+                        <div class="flex flex-col gap-4 mb-8 text-right bg-white/10 p-6 rounded-xl backdrop-blur-sm border border-white/20 inline-block w-full">
+                            <div class="flex items-start gap-4">
+                                <i class="fa-solid fa-location-dot mt-1 text-spring-yellow text-xl w-6 text-center"></i>
+                                <div>
+                                    <h3 class="font-bold">כתובת:</h3>
+                                    <p>רחוב דיזנגוף 123, תל אביב</p>
+                                    <p class="text-sm text-spring-light/80 mt-1">החנות נגישה במלואה לכיסאות גלגלים (כניסה ללא מדרגות, תאי מדידה מרווחים).</p>
+                                </div>
+                            </div>
+                            <div class="w-full h-px bg-white/20"></div>
+                            <div class="flex items-start gap-4">
+                                <i class="fa-solid fa-clock mt-1 text-spring-yellow text-xl w-6 text-center"></i>
+                                <div>
+                                    <h3 class="font-bold">שעות פעילות:</h3>
+                                    <p>א' - ה': 10:00 - 19:00</p>
+                                    <p>ו': 09:30 - 15:00</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                            <button class="bg-white text-spring-darkgreen px-6 py-3 rounded-full font-bold shadow-lg hover:bg-spring-light transition flex items-center gap-2" aria-label="פתח ניווט בגוגל מפות">
+                                <i class="fa-solid fa-map" aria-hidden="true"></i> ניווט לחנות
+                            </button>
+                            <button class="bg-transparent border border-white text-white px-6 py-3 rounded-full font-bold hover:bg-white/10 transition" aria-label="הזמן איסוף בגדים למכירה">
+                                יש לכם בגדים למסור?
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 w-full h-80 rounded-2xl overflow-hidden shadow-2xl relative border-4 border-white/20">
+                        <!-- Map placeholder image for visual appeal instead of actual iframe to avoid layout issues in some contexts -->
+                        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="מפת תל אביב" class="w-full h-full object-cover opacity-80 mix-blend-overlay absolute inset-0">
+                        <div class="absolute inset-0 bg-spring-darkgreen/40"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="bg-white p-4 rounded-xl shadow-lg text-center transform hover:scale-105 transition cursor-pointer">
+                                <div class="text-spring-darkgreen text-3xl mb-2"><i class="fa-solid fa-location-dot"></i></div>
+                                <div class="font-bold text-gray-800">SpringVibes תל אביב</div>
+                                <div class="text-sm text-gray-500">דיזנגוף 123</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white pt-12 pb-8 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 text-center md:text-right">
+                <div>
+                    <div class="flex items-center justify-center md:justify-start gap-2 mb-4">
+                        <i class="fa-solid fa-leaf text-spring-darkgreen text-xl"></i>
+                        <span class="font-bold text-xl text-spring-darkgreen tracking-tight">SpringVibes</span>
+                    </div>
+                    <p class="text-gray-500 max-w-xs">אופנת יד שנייה איכותית לכל המשפחה. מתלבשים יפה ושומרים על הסביבה.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4">קישורים מהירים</h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><a href="#" class="hover:text-spring-darkgreen transition">חנות אונליין</a></li>
+                        <li><a href="#" class="hover:text-spring-darkgreen transition">מדיניות החזרות</a></li>
+                        <li><a href="#" class="hover:text-spring-darkgreen transition">הצהרת נגישות</a></li>
+                        <li><a href="#" class="hover:text-spring-darkgreen transition">איך מוכרים לנו?</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4">עקבו אחרינו</h4>
+                    <div class="flex gap-4 justify-center md:justify-start">
+                        <a href="#" class="w-10 h-10 bg-spring-light text-spring-darkgreen rounded-full flex items-center justify-center hover:bg-spring-green hover:text-white transition" aria-label="פייסבוק">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-spring-light text-spring-darkgreen rounded-full flex items-center justify-center hover:bg-spring-pink hover:text-white transition" aria-label="אינסטגרם">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-spring-light text-spring-darkgreen rounded-full flex items-center justify-center hover:bg-black hover:text-white transition" aria-label="טיקטוק">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-100 text-center text-gray-500 text-sm">
+                <p>&copy; 2026 SpringVibes חנות בגדי יד שנייה תל אביב. כל הזכויות שמורות.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="#" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-[#20b858] focus:outline-none focus:ring-4 focus:ring-green-300 transition-colors whatsapp-float group" aria-label="שלח הודעה בוואטסאפ">
+        <i class="fa-brands fa-whatsapp"></i>
+        <!-- Tooltip -->
+        <span class="absolute right-16 bg-white text-gray-800 text-sm py-2 px-4 rounded-lg shadow-md border border-gray-100 opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap font-medium z-50">
+            יש שאלה? אנחנו זמינים! 👋
+        </span>
+    </a>
+
+    <!-- Floating Accessibility Button -->
+    <button id="accessibility-btn" class="fixed bottom-6 left-6 z-50 bg-spring-blue text-gray-800 w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-opacity-80 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-colors group" aria-label="פתח תפריט נגישות">
+        <i class="fa-solid fa-universal-access"></i>
+        <span class="absolute left-16 bg-white text-gray-800 text-sm py-2 px-4 rounded-lg shadow-md border border-gray-100 opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap font-medium z-50">
+            אפשרויות נגישות
+        </span>
+    </button>
+
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const icon = btn.querySelector('i');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            
+            // Update aria-expanded
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', !isExpanded);
+            
+            // Toggle icon
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            }
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                btn.setAttribute('aria-expanded', 'false');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Message Box functionality (replacing alerts)
+        function showMessage(title, message, type = 'info') {
+            // Create overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center opacity-0 transition-opacity p-4';
+            
+            // Create modal
+            const modal = document.createElement('div');
+            modal.className = 'bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full transform scale-95 transition-transform text-right';
+            
+            // Icon based on type
+            let iconHtml = '';
+            let colorClass = '';
+            if (type === 'success') {
+                iconHtml = '<i class="fa-solid fa-circle-check text-5xl"></i>';
+                colorClass = 'text-spring-darkgreen';
+            } else {
+                iconHtml = '<i class="fa-solid fa-circle-info text-5xl"></i>';
+                colorClass = 'text-spring-blue';
+            }
+
+            modal.innerHTML = `
+                <div class="flex flex-col items-center text-center mb-4">
+                    <div class="${colorClass} mb-3">${iconHtml}</div>
+                    <h3 class="text-xl font-bold text-gray-900">${title}</h3>
+                </div>
+                <p class="text-gray-600 mb-6 text-center">${message}</p>
+                <button class="w-full bg-spring-darkgreen text-white py-2 rounded-xl font-bold hover:bg-opacity-90 transition">הבנתי, תודה!</button>
+            `;
+
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+            
+            // Prevent scrolling on body
+            document.body.style.overflow = 'hidden';
+
+            // Animate in
+            setTimeout(() => {
+                overlay.classList.remove('opacity-0');
+                modal.classList.remove('scale-95');
+                modal.classList.add('scale-100');
+            }, 10);
+
+            // Close functionality
+            const closeBtn = modal.querySelector('button');
+            const close = () => {
+                overlay.classList.add('opacity-0');
+                modal.classList.remove('scale-100');
+                modal.classList.add('scale-95');
+                setTimeout(() => {
+                    document.body.removeChild(overlay);
+                    document.body.style.overflow = ''; // Restore scrolling
+                }, 300);
+            };
+
+            closeBtn.addEventListener('click', close);
+            overlay.addEventListener('click', (e) => {
+                if(e.target === overlay) close();
+            });
+        }
+
+        // Add event listeners to demo buttons
+        document.addEventListener('DOMContentLoaded', () => {
+            const shopButtons = document.querySelectorAll('button:not(#mobile-menu-btn)');
+            
+            shopButtons.forEach(button => {
+                if(!button.closest('.fixed')) { // Ignore floating whatsapp
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const btnText = button.textContent.trim();
+                        
+                        if(btnText.includes('ניווט') || button.innerHTML.includes('fa-map')) {
+                             showMessage('ניווט', 'באתר האמיתי פעולה זו תפתח את Waze או Google Maps עם הכתובת של החנות שלנו בתל אביב.', 'info');
+                        } else if(btnText.includes('מוסרים') || btnText.includes('למסור')) {
+                             showMessage('מכירת בגדים', 'השאירו פרטים בדף הבא (שייבנה בהמשך) ונחזור אליכם לתיאום איסוף או הגעה לחנות להערכת שווי הבגדים שלכם.', 'success');
+                        }
+                        else {
+                            showMessage('בקרוב!', 'חנות האונליין שלנו עדיין בשלבי הקמה. מוזמנים בינתיים לבקר אותנו בחנות הפיזית בתל אביב.', 'success');
+                        }
+                    });
+                }
+            });
+
+            const categoryLinks = document.querySelectorAll('.category-card');
+            categoryLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const category = link.querySelector('h3').textContent;
+                    showMessage('קטגוריה נבחרה', `באתר המלא, תועברו כעת לקטלוג המלא של בגדי ${category} מכל העונות.`, 'info');
+                });
+            });
+
+            const whatsappBtn = document.querySelector('.whatsapp-float');
+            whatsappBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showMessage('הודעת וואטסאפ', 'פעולה זו תפתח את אפליקציית וואטסאפ עם הודעה מוכנה מראש לצוות החנות.', 'success');
+            });
+
+            // Accessibility Button logic
+            const accessibilityBtn = document.getElementById('accessibility-btn');
+            if (accessibilityBtn) {
+                accessibilityBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showMessage('תפריט נגישות', 'האתר שלנו מותאם לנגישות ברמה AA. באתר המלא פעולה זו תפתח תפריט המאפשר שינוי גודל גופן, ניגודיות גבוהה והדגשת קישורים. כמו כן, החנות הפיזית שלנו מונגשת לחלוטין.', 'info');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
